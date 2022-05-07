@@ -1,0 +1,114 @@
+@import url('https://fonts.googleapis.com/css2?family=Permanent+Marker&display=swap');
+
+body {
+  margin: 0;
+  padding: 0;
+  font-family: 'Permanent Marker', Sans-serif, Arial;
+  color: black;
+  text-shadow: 8px 4px 8px  #eee;
+}
+
+.container {
+  display: flex;
+  flex-direction: column;
+  background-image: linear-gradient(rgba(255,255,255,0.4), rgba(255,255,255,0.4)), url(https://wallup.net/wp-content/uploads/2015/06/Fantasy-library-art-748x435.jpg);
+  filter: contrast(1.5);
+  background-repeat: no-repeat;
+  background-size: cover;
+  width: 80%;
+  border: 2px solid black;
+  margin:0 auto;
+  height: 100vh;
+  align-items: center;
+  justify-content: center;
+  box-sizing: border-box;
+}
+
+
+header {
+  margin-top: -10%;
+  text-align: center;
+}
+main {
+  margin-top: 10%;
+  display:flex;
+  flex-direction: column;
+
+}
+
+#title {
+  all: unset;
+  max-width: 300px;
+  align-self: center;
+  box-shadow: 2px 2px 4px 6px #eee;
+  margin-top: 5px;
+  border: 1px solid #000;
+  height: 30px;
+  border: 5px;
+}
+
+#title::placeholder {
+  text-align: center;
+  color: #000;
+}
+ label{
+  align-self: center;
+  margin-bottom: 5px;
+  font-size: 18px;
+}
+
+#title:focus {
+  background-color:lightpink;
+}
+.list {
+  list-style: none;
+  margin-left: 10px;
+}
+.list a {
+  color: #000;
+  margin: 10px;
+}
+
+#search-btn {
+  all: unset;
+  max-width: 200px;
+  align-self: center;
+  text-align: center;
+  margin-top: 13px;
+  padding: 5px;
+  background: linear-gradient(to left, green, yellow);
+  border: 1px solid #000;
+  border-radius: 15px;
+  box-shadow: 0 5px 8px green;
+  cursor: pointer;
+  font-weight: 600;
+
+}
+#display-list {
+  margin: 0 auto;
+  width: 80%;
+  text-align:center;
+
+}
+.display-plot {
+  display: none;
+  background-color: black;
+  margin: 0 auto;
+  padding: 10px;
+  width: 60%;
+  text-align: center;
+  border: 2px solid #000;
+  box-shadow: 0 5px 8px 10px #eee;
+  color: #fff;
+}
+#close-btn {
+  width: 20px;
+  height: 20px;
+  text-align: center;
+  cursor: pointer;
+
+}
+.plot {
+  font: italic bold 18px Georgia, serif;
+  text-shadow: none;
+}
