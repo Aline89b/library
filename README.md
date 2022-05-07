@@ -9,7 +9,7 @@
 ![Look for fantasy book in library API](assets/img/javascript-library.png)
 
 This is my second javascript project for s2i platform.
-Typing in the search bar the book's title or author it is possible to check if it is present in the list of fantasy books got from ![Open library](https://openlibrary.org/developers/api). Then, clicking on the result appears a modal where you can read the plot of the book then click x button to close it and maybe make a new search.
+Typing in the search bar the book's title or author it is possible to check if it is present in the list of fantasy books got from [Open library](https://openlibrary.org/developers/api). Then, clicking on the result appears a modal where you can read the plot of the book then click x button to close it and maybe make a new search.
 
 
 ## Using library
