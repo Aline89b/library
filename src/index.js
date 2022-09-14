@@ -1,3 +1,7 @@
+import "./style.css"
+import { get } from 'lodash'
+
+
 
 const inputField = document.getElementById("title")
 const searchBtn = document.getElementById("search-btn")
@@ -22,56 +26,24 @@ inputField.addEventListener("keyup", (e) => {
   console.log(matches)
 })
 
+inputField.addEventListener("keypress", (e) => {
+  if(e.key === "Enter") {
+    e.preventDefault()
+    searchBtn.click()
+  }
+})
+
+
 searchBtn.addEventListener("click", displayTitles)
 
-function displayTitles() {
-  list.innerHTML = " "
-  if (matches.length > 0){
-  matches.forEach(match => {
-  const li = document.createElement("li")
-  li.style.cssText = "list-style: none; margin-left: 10px;"
-  const link = document.createElement("a")
-  link.style.cssText = "color: #000; margin: 10px;"
-  link.id = "plot"
-  link.href ="javascript: test()"
-  list.append(li)
-  li.append(link)
-  link.textContent =`${match.authors[0].name} : ${match.title}`
-   key = match.key
-   })
- } else {
-   list.textContent = "No matches found"
- }
-  inputField.value = " "
-  }
 
-
-const getData = async () => {
-  try {
-    const url = "https://openlibrary.org/subjects/fantasy.json"
-    const res = await fetch(url)
-    const data = await res.json()
-    console.log(data.works)
-    return data
-
-  } catch(err) {
-    console.error(err)
-    alert(err)
-  }
-}
-
-getData().then(data => {
-    books = data.works
-       })
-
-
-function test() {
+function showPlot() {
     const getPlot = async () => {
       try {
         const url = `https://openlibrary.org${key}.json`
         const res = await fetch(url)
         const data = await res.json()
-        console.log(data.desciption)
+        console.log(data.description)
         console.log(data)
         return  data
 
@@ -91,6 +63,48 @@ function test() {
        })
 
 }
+
+const getData = async () => {
+  try {
+    const url = "https://openlibrary.org/subjects/fantasy.json"
+    const res = await fetch(url)
+    const data = await res.json()
+    console.log(data.works)
+
+    return data
+
+  } catch(err) {
+    console.error(err)
+    alert(err)
+  }
+}
+
+getData().then(data => {
+    books = data.works
+       })
+
+       function displayTitles() {
+         list.innerHTML = " "
+         if (matches.length > 0){
+         matches.forEach(match => {
+         const li = document.createElement("li")
+         li.style.cssText = "list-style: none; margin-left: 10px;"
+         const link = document.createElement("a")
+         link.style.cssText = "color: #000; margin: 10px;"
+         link.id = "plot"
+         link.href = "javascript: showPlot()"
+         list.append(li)
+         li.append(link)
+         link.textContent =`${match.authors[0].name} : ${match.title}`
+          key = match.key
+          })
+        } else {
+          list.textContent = "No matches found"
+        }
+         inputField.value = " "
+         }
+
+
 
 function closeModal() {
   closeBtn.addEventListener("click", () => {
