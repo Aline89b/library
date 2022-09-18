@@ -1,4 +1,5 @@
 import "./style.css"
+import { get } from 'lodash.get';
 
 
 
@@ -85,7 +86,8 @@ getData().then(data => {
                  const res = await fetch(url)
                  const data = await res.json()
                  console.log(data.description)
-                 console.log(data)
+                 console.log(data.description.value)
+                 
                  return  data
 
                } catch(err) {
@@ -95,11 +97,12 @@ getData().then(data => {
              }
 
             getPlot().then(data => {
+
                 para = document.createElement("p")
                 displayPlot.style.display = "block"
                 displayPlot.appendChild(para)
                 para.classList.add("plot")
-                para.textContent = data.description
+                para.textContent =  data.description
                 closeModal()
                 })
 

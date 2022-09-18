@@ -6,7 +6,9 @@
   "scripts": {
     "watch": "webpack --watch",
     "dev": "webpack serve --mode development",
-    "build": "webpack --mode production"
+    "build": "webpack --mode production",
+    "predeploy": "npm run build",
+    "deploy": "gh-pages -d dist"
   },
   "repository": {
     "type": "git",
@@ -18,7 +20,7 @@
   "bugs": {
     "url": "https://github.com/Aline89b/library/issues"
   },
-  "homepage": "https://github.com/Aline89b/library#readme",
+  "homepage": "https://aline89b.github.io/library",
   "devDependencies": {
     "@babel/core": "^7.18.9",
     "@babel/preset-env": "^7.18.9",
@@ -26,6 +28,7 @@
     "clean-webpack-plugin": "^4.0.0",
     "css-loader": "^6.7.1",
     "dotenv-webpack": "^8.0.0",
+    "gh-pages": "^4.0.0",
     "html-webpack-plugin": "^5.5.0",
     "style-loader": "^3.3.1",
     "web-dev-server": "^3.0.27",
