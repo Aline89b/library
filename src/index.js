@@ -1,5 +1,5 @@
 import "./style.css"
-import { get } from 'lodash'
+import  get from 'lodash.get';
 
 
 
@@ -37,41 +37,27 @@ inputField.addEventListener("keypress", (e) => {
 searchBtn.addEventListener("click", displayTitles)
 
 
-function showPlot() {
-    const getPlot = async () => {
-      try {
-        const url = `https://openlibrary.org${key}.json`
-        const res = await fetch(url)
-        const data = await res.json()
-        console.log(data.description)
-        console.log(data)
-        return  data
-
-      } catch(err) {
-          console.log(err)
-        alert(err)
-      }
-    }
-
-   getPlot().then(data => {
-       para = document.createElement("p")
-       displayPlot.style.display = "block"
-       displayPlot.appendChild(para)
-       para.classList.add("plot")
-       para.textContent = data.description
-       closeModal()
-       })
-
-}
 
 const getData = async () => {
   try {
     const url = "https://openlibrary.org/subjects/fantasy.json"
     const res = await fetch(url)
-    const data = await res.json()
-    console.log(data.works)
+    let data = await res.json()
 
-    return data
+    function get( data, keys, defaultVal ){
+      defaultVal = alert("not available")
+      keys = Array.isArray( keys )? keys : keys.split('.');
+      data = data[keys[0]];
+        console.log(_.get(data, keys, defaultVal))
+      if( data && keys.length>1 ){
+
+        return get( data, keys.slice(1), defaultVal );
+      }
+      console.log(defaultVal)
+      return data === undefined? defaultVal : data;
+    }
+
+      return data
 
   } catch(err) {
     console.error(err)
@@ -92,7 +78,8 @@ getData().then(data => {
          const link = document.createElement("a")
          link.style.cssText = "color: #000; margin: 10px;"
          link.id = "plot"
-         link.href = "javascript: showPlot()"
+         link.href ="# "
+         li.addEventListener("click",showPlot)
          list.append(li)
          li.append(link)
          link.textContent =`${match.authors[0].name} : ${match.title}`
@@ -104,15 +91,44 @@ getData().then(data => {
          inputField.value = " "
          }
 
+         function showPlot() {
+             const getPlot = async () => {
+               try {
+                 const url = `https://openlibrary.org${key}.json`
+                 const res = await fetch(url)
+                 const data = await res.json()
+
+                 console.log(data.description)
 
 
-function closeModal() {
-  closeBtn.addEventListener("click", () => {
-     displayPlot.style.display = "none"
-     reset()
-        })
-      }
 
-      const reset = () => {
-        para.innerHTML = " "
-        }
+                 return  data
+
+               } catch(err) {
+                   console.log(err)
+                 alert(err)
+               }
+             }
+
+            getPlot().then(data => {
+              const plotDes =  data.description
+                console.log(typeof plotDes)
+                para = document.createElement("p")
+                displayPlot.style.display = "block"
+                displayPlot.appendChild(para)
+                para.classList.add("plot")
+                para.textContent =  plotDes === "" ? data.description : data.description.value
+                closeModal()
+                })
+
+         }
+      function closeModal() {
+      closeBtn.addEventListener("click", () => {
+         displayPlot.style.display = "none"
+         reset()
+            })
+          }
+
+          const reset = () => {
+            para.innerHTML = " "
+            }
