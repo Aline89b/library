@@ -1,5 +1,5 @@
 import "./style.css"
-import { get } from 'lodash.get';
+import  get from 'lodash.get';
 
 
 
@@ -42,10 +42,22 @@ const getData = async () => {
   try {
     const url = "https://openlibrary.org/subjects/fantasy.json"
     const res = await fetch(url)
-    const data = await res.json()
-    console.log(data.works)
+    let data = await res.json()
 
-    return data
+    function get( data, keys, defaultVal ){
+      defaultVal = alert("not available")
+      keys = Array.isArray( keys )? keys : keys.split('.');
+      data = data[keys[0]];
+        console.log(_.get(data, keys, defaultVal))
+      if( data && keys.length>1 ){
+
+        return get( data, keys.slice(1), defaultVal );
+      }
+      console.log(defaultVal)
+      return data === undefined? defaultVal : data;
+    }
+
+      return data
 
   } catch(err) {
     console.error(err)
@@ -85,9 +97,11 @@ getData().then(data => {
                  const url = `https://openlibrary.org${key}.json`
                  const res = await fetch(url)
                  const data = await res.json()
+
                  console.log(data.description)
-                 console.log(data.description.value)
-                 
+
+
+
                  return  data
 
                } catch(err) {
@@ -97,12 +111,13 @@ getData().then(data => {
              }
 
             getPlot().then(data => {
-
+              const plotDes =  data.description
+                console.log(typeof plotDes)
                 para = document.createElement("p")
                 displayPlot.style.display = "block"
                 displayPlot.appendChild(para)
                 para.classList.add("plot")
-                para.textContent =  data.description
+                para.textContent =  plotDes === "" ? data.description : data.description.value
                 closeModal()
                 })
 
