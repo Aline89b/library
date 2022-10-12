@@ -79,7 +79,7 @@ getData().then(data => {
          link.style.cssText = "color: #000; margin: 10px;"
          link.id = "plot"
          link.href ="# "
-         li.addEventListener("click",showPlot)
+         li.addEventListener("click", showPlot)
          list.append(li)
          li.append(link)
          link.textContent =`${match.authors[0].name} : ${match.title}`
@@ -91,7 +91,7 @@ getData().then(data => {
          inputField.value = " "
          }
 
-         function showPlot() {
+          function showPlot() {
              const getPlot = async () => {
                try {
                  const url = `https://openlibrary.org${key}.json`
@@ -99,8 +99,6 @@ getData().then(data => {
                  const data = await res.json()
 
                  console.log(data.description)
-
-
 
                  return  data
 
@@ -117,11 +115,13 @@ getData().then(data => {
                 displayPlot.style.display = "block"
                 displayPlot.appendChild(para)
                 para.classList.add("plot")
-                para.textContent =  plotDes === "" ? data.description : data.description.value
+                para.textContent =  typeof plotDes === "string" ? plotDes : data.description.value
                 closeModal()
                 })
 
-         }
+              }
+
+
       function closeModal() {
       closeBtn.addEventListener("click", () => {
          displayPlot.style.display = "none"
