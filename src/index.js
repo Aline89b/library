@@ -117,7 +117,7 @@ getData().then(data => {
                 displayPlot.style.display = "block"
                 displayPlot.appendChild(para)
                 para.classList.add("plot")
-                para.textContent =  plotDes === "" ? data.description : data.description.value
+                para.textContent =  typeof plotDes === "string" ? plotDes : data.description.value
                 closeModal()
                 })
 
